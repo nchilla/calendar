@@ -134,6 +134,11 @@ let tasks=[
     "distance":"57600",
     "obstacles":[
       {
+        "description":"",
+        "effects":[""],
+        "duration":0
+      },
+      {
         "description":"I'm getting sidetracked researching things tangentially related to the project.",
         "effects":["focus debuff"],
         "duration":0
@@ -147,8 +152,13 @@ let tasks=[
   },
   {
     "task":"visual design",
-    "distance":"14400",
+    "distance":"20000",
     "obstacles":[
+      {
+        "description":"",
+        "effects":[""],
+        "duration":0
+      },
       {
         "description":"I don't like where this is going. I have to start from scratch.",
         "effects":["start over"],
@@ -158,8 +168,13 @@ let tasks=[
   },
   {
     "task":"fabrication",
-    "distance":"14400",
+    "distance":"20000",
     "obstacles":[
+      {
+        "description":"Hard at work",
+        "effects":[],
+        "duration":0
+      },
       {
         "description":"Why did I choose something so technically complex on such short notice?????????",
         "effects":["more work"],
@@ -173,7 +188,7 @@ let tasks=[
 window.addEventListener('load',initiate);
 
 function initiate(){
-  fetch('/output.json')
+  fetch('/output2.json')
   .then((response) => {
     return response.json()
   })

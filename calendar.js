@@ -27,8 +27,8 @@ let junctions={
  //next item type
 
 function fillJunctions(junction){
-  console.log(junction.currentTask);
-  console.log("proceeding to: ",junction.next);
+  // console.log(junction.currentTask);
+  // console.log("proceeding to: ",junction.next);
   let nextOne;
   switch(junction.next){
     case "obstacle":
@@ -50,12 +50,16 @@ function fillJunctions(junction){
 
 
 function createTaskPath(junction){
-
+  if(junction.currentTask.changeNext){
+    junction.currentTask.progress=0;
+    junction.currentTask.velocity=0;
+    junction.currentTask.acceleration=2;
+  }
 
   let decision=obstacleOrTaskObstacle(junction);
   let newTime=decision.time;
   let nextThing=decision.next;
-  console.log("decision:",decision);
+  // console.log("decision:",decision);
   if(newTime==0&&nextThing=="task-obstacle"){
     return;
   }
@@ -70,20 +74,20 @@ function createTaskPath(junction){
     progressed=whatIsLeft;
     newTime=solveForTime(progressed,junction.currentTask.velocity,junction.currentTask.acceleration);
     taskInfo.id=junction.currentTask.id==2?undefined:junction.currentTask.id+1;
-    taskInfo.progress=0;
-    taskInfo.velocity=0;
-    taskInfo.acceleration=2;
+    // taskInfo.progress=0;
+    // taskInfo.velocity=0;
+    // taskInfo.acceleration=2;
     taskInfo.changeNext=true;
     nextThing=taskInfo.id?nextThing:"filler";
   }else{
     taskInfo.id=junction.currentTask.id;
-    taskInfo.progress=junction.currentTask.progress+progressed;
-    taskInfo.velocity=junction.currentTask.velocity + newTime*junction.currentTask.acceleration;
-  }
     // taskInfo.progress=junction.currentTask.progress+progressed;
     // taskInfo.velocity=junction.currentTask.velocity + newTime*junction.currentTask.acceleration;
+  }
+    taskInfo.progress=junction.currentTask.progress+progressed;
+    taskInfo.velocity=junction.currentTask.velocity + newTime*junction.currentTask.acceleration;
   // if(junction.time)
-  
+
   if(decision.time!==Infinity){
     // nextThing="filler";
 
@@ -96,7 +100,7 @@ function createTaskPath(junction){
       "lastObstacle":junction.lastObstacle,
       "next":nextThing
     })
-    console.log('called from task path');
+    // console.log('called from task path');
     fillJunctions(junction.junctions[0]);
   }
 
@@ -112,6 +116,10 @@ function createPaths(junction,addingId,isGlobal){
 
   let adding=isGlobal?globalObstacles[addingId]:tasks[addingId];
   let looping=isGlobal?adding.paths:adding.obstacles;
+  if(!isGlobal){
+    console.log('looping: ',looping);
+  }
+
   looping.forEach((item, i) => {
     junction.junctions.push({
       "type":isGlobal?"obstacle":"task-obstacle",
@@ -122,7 +130,6 @@ function createPaths(junction,addingId,isGlobal){
       "lastObstacle":isGlobal?addingId:junction.lastObstacle,
       "next":"task"
     })
-    console.log('called from obstacle loop');
     fillJunctions(junction.junctions[i]);
   });
 }
@@ -366,6 +373,11 @@ let tasks=[
     "distance":"57600",
     "obstacles":[
       {
+        "description":"",
+        "effects":[""],
+        "duration":0
+      },
+      {
         "description":"I'm getting sidetracked researching things tangentially related to the project.",
         "effects":["focus debuff"],
         "duration":0
@@ -379,8 +391,13 @@ let tasks=[
   },
   {
     "task":"visual design",
-    "distance":"14400",
+    "distance":"20000",
     "obstacles":[
+      {
+        "description":"",
+        "effects":[""],
+        "duration":0
+      },
       {
         "description":"I don't like where this is going. I have to start from scratch.",
         "effects":["start over"],
@@ -390,8 +407,13 @@ let tasks=[
   },
   {
     "task":"fabrication",
-    "distance":"14400",
+    "distance":"20000",
     "obstacles":[
+      {
+        "description":"Hard at work",
+        "effects":[],
+        "duration":0
+      },
       {
         "description":"Why did I choose something so technically complex on such short notice?????????",
         "effects":["more work"],
@@ -405,7 +427,7 @@ fillJunctions(junctions);
 
 
 setTimeout(function () {
-  fs.writeFile('/Users/hubblebot/Dropbox/bfacd/calendar/output.json', JSON.stringify(junctions), err => {
+  fs.writeFile('/Users/hubblebot/Dropbox/bfacd/calendar/output2.json', JSON.stringify(junctions), err => {
     if (err) {
       console.error(err)
       return
