@@ -173,7 +173,7 @@ let tasks=[
 window.addEventListener('load',initiate);
 
 function initiate(){
-  fetch('/output.json')
+  fetch('output.json')
   .then((response) => {
     return response.json()
   })
