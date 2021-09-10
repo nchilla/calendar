@@ -6,13 +6,44 @@
 body{
   /* background-color: blue;
   min-height:100vh; */
+  background-color: beige;
 }
 
+#backgrid,#i0{
+  position:absolute;
+  top:0;
+
+}
 
 #i0{
-  position:absolute;
-
+  right:0;
 }
+
+#backgrid{
+  left:0;
+  width:100vw;
+}
+
+.hour{
+  width:100%;
+  border-bottom: dashed 1px rgba(0,0,0,0.5);
+  height:120px;
+  position:relative;
+}
+
+.hour code{
+  position:absolute;
+  top:0;
+  left:0;
+  margin:20px;
+  font-size:25px;
+}
+
+.hour code:last-child:not(:first-child){
+  left:auto;
+  right:0;
+}
+
 
 .gap{
   background-color: black;
@@ -29,6 +60,9 @@ li[data-type="obstacle"]>.gap{
 }
 
 li[data-type="task"]>.gap{
+  --r:0;
+  --g:0;
+  --b:0;
   background: linear-gradient(0deg, rgba(255,0,0,var(--velocity2)) 0%, rgba(255,0,0,var(--velocity1)) 100%);
 }
 
