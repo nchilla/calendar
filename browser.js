@@ -185,6 +185,16 @@ function initiate(){
     let hierarchized=d3.hierarchy(data,function(d){return d.junctions; });
     console.log(hierarchized);
     children(hierarchized,[0]);
+    for(var i=0; i<40; i=i+2){
+      d3.select('#backgrid').append('div').attr('id','hour-'+i).attr('class','hour').append('code').text(i+" hours");
+      if(i==0){
+        d3.select('#hour-'+i).append('code').text("Wednesday noon");
+      }else if(i==12){
+        d3.select('#hour-'+i).append('code').text("Midnight");
+      }else if(i==20){
+        d3.select('#hour-'+i).append('code').text("Thursday morning");
+      }
+    }
 
 
   })
@@ -214,8 +224,13 @@ function children(object,indexes){
       let duration;
       switch (item.data.type) {
         case "task":
-        newEl.style("--velocity1",Math.floor(object.data.currentTask.velocity/2));
-        newEl.style("--velocity2",Math.floor(item.data.currentTask.velocity/2));
+        let vel1=Math.floor(object.data.currentTask.velocity/2);
+        let vel2=Math.floor(item.data.currentTask.velocity/2);
+        if(vel1 ==0 && vel2 ==0){
+          vel2=70;
+        }
+        newEl.style("--velocity1",vel1);
+        newEl.style("--velocity2",vel2);
         // console.log(object.data.currentTask.velocity,item.data.currentTask.velocity);
         duration=item.data.duration;
         break;
