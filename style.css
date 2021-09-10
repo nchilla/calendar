@@ -9,6 +9,33 @@ body{
   background-color: beige;
 }
 
+#key{
+  position:fixed;
+  top:100vh;
+  left:0;
+  background-color: beige;
+  transform:translateY(-100%);
+  padding:10px;
+  border-top:1px solid black;
+}
+
+#key span{
+  display:inline-block;
+  height:15px;
+  width:30px;
+  margin-right:10px;
+}
+
+#key span.gradient-bar{
+  background: linear-gradient(90deg, rgba(255,0,0,0) 0%, rgba(255,0,0,1) 100%);
+  width:30px;
+}
+
+#key span.green-box{
+  background-color:teal;
+}
+
+
 #backgrid,#i0{
   position:absolute;
   top:0;
@@ -36,6 +63,10 @@ body{
   top:0;
   left:0;
   margin:20px;
+  font-size:15px;
+}
+
+code{
   font-size:15px;
 }
 
