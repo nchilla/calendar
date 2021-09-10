@@ -60,10 +60,8 @@ li[data-type="obstacle"]>.gap{
 }
 
 li[data-type="task"]>.gap{
-  --r:0;
-  --g:0;
-  --b:0;
   background: linear-gradient(0deg, rgba(255,0,0,var(--velocity2)) 0%, rgba(255,0,0,var(--velocity1)) 100%);
+  /* background: linear-gradient(0deg, rgba(var(--r),var(--g),var(--b),var(--velocity2)) 0%, rgba(var(--r),var(--g),var(--b),var(--velocity1)) 100%); */
 }
 
 li[data-type="task-obstacle"]>.gap{
@@ -88,6 +86,9 @@ li[data-type="task-obstacle"]>.gap{
   display:table-cell;
   width:fit-content;
   --duration:20px;
+  --r:0;
+  --g:0;
+  --b:0;
   /* border-top:1px solid black; */
   /* height:20px; */
   /* padding:0px 5px; */

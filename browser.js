@@ -229,6 +229,17 @@ function children(object,indexes){
         if(vel1 ==0 && vel2 ==0){
           vel2=70;
         }
+        // switch(item.data.currentTask.id){
+        //   case 0:
+        //   newEl.style("--g",'255');
+        //   break;
+        //   case 1:
+        //   newEl.style("--r",'255');
+        //   break;
+        //   case 2:
+        //   newEl.style("--b",'255');
+        //   break;
+        // }
         newEl.style("--velocity1",vel1);
         newEl.style("--velocity2",vel2);
         // console.log(object.data.currentTask.velocity,item.data.currentTask.velocity);
